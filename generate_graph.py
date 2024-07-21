@@ -81,7 +81,7 @@ def generate_svg(contributions):
 
 def main():
     username = os.environ['GITHUB_REPOSITORY'].split('/')[0]
-    token = os.environ['INPUT_GITHUB_TOKEN']
+    token = os.environ['GITHUB_TOKEN']
     
     contributions = fetch_contributions(username, token)
     svg = generate_svg(contributions)
