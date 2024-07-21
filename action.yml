@@ -1,0 +1,18 @@
+name: 'Generate GitHub Contribution Graph'
+description: 'Generates an SVG of your GitHub contribution graph'
+inputs:
+  github_token:
+    description: 'GitHub token'
+    required: true
+outputs:
+  svg:
+    description: 'The generated SVG'
+runs:
+  using: 'composite'
+  steps:
+    - run: pip install -r ${{ github.action_path }}/requirements.txt
+      shell: bash
+    - run: python ${{ github.action_path }}/generate_graph.py
+      shell: bash
+      env:
+        INPUT_GITHUB_TOKEN: ${{ inputs.github_token }}
