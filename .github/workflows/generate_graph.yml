@@ -1,0 +1,30 @@
+name: Generate Contribution Graph
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Run daily at midnight
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  generate-graph:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Generate contribution graph
+      uses: ./
+      id: generate
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Update README
+      run: |
+        echo "${{ steps.generate.outputs.svg }}" > contribution_graph.svg
+        sed -i '/<!-- contribution-graph-start -->/,/<!-- contribution-graph-end -->/c\<!-- contribution-graph-start -->\n![Contribution Graph](./contribution_graph.svg)\n<!-- contribution-graph-end -->' README.md
+    
+    - name: Commit and push if changed
+      run: |
+        git config --global user.email "action@github.com"
+        git config --global user.name "GitHub Action"
+        git add contribution_graph.svg README.md
+        git diff --quiet && git diff --staged --quiet || (git commit -m "Update contribution graph" && git push)
