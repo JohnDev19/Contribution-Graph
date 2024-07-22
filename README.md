@@ -2,6 +2,8 @@
 
 ![GitHub Contribution Graph](https://contribution-graph-ohi6.onrender.com/api/graph?username=JohnDev19)
 
+![GitHub Contribution Graph](https://68f79ac6-86b8-40d4-8b4e-14c925c5defa-00-2bb80b48sjqce.picard.replit.dev/api/graph?username=JohnDev19)
+
 This project provides a service to generate and display GitHub-style contribution graphs for any GitHub user. It's perfect for adding a visual representation of your GitHub activity to your profile README or any other markdown file.
 
 ## Features
