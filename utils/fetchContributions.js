@@ -45,10 +45,8 @@ function generateSVG(contributions) {
   const cellSize = 10;
   const cellPadding = 2;
 
-  let svg = `<?xml version="1.0" encoding="UTF-8"?>
-  <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">
+  let svg = `<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">
     <style>
-      rect { shape-rendering: geometricPrecision; }
       .contribution { fill: #ebedf0; }
       .contribution-1 { fill: #9be9a8; }
       .contribution-2 { fill: #40c463; }
@@ -80,5 +78,8 @@ function generateSVG(contributions) {
 
   svg += '</svg>';
 
-  return svg;
+  return { 
+    svg,
+    totalContributions: contributions.totalContributions
+  };
 }
