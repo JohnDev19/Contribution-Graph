@@ -2,7 +2,7 @@ services:
   - type: web
     name: github-contribution-graph
     env: node
-    buildCommand: npm install && npm run build
+    buildCommand: npm run cleanup && npm install && npm run build
     startCommand: npm start
     envVars:
       - key: GITHUB_TOKEN
