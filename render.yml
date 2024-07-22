@@ -7,4 +7,7 @@ services:
     envVars:
       - key: GITHUB_TOKEN
         sync: false
-    plan: free 
+    disk:
+      name: next-cache
+      mountPath: /opt/render/project/src/.next/cache
+      sizeGB: 1
