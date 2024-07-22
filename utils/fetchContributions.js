@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { createCanvas } from 'canvas';
 
 export async function fetchContributions(username, token) {
   const query = `
@@ -33,25 +32,29 @@ export async function fetchContributions(username, token) {
     });
 
     const contributions = response.data.data.user.contributionsCollection.contributionCalendar;
-    return generatePNG(contributions);
+    return generateSVG(contributions);
   } catch (error) {
     console.error('Error fetching contributions:', error);
     throw error;
   }
 }
 
-function generatePNG(contributions) {
+function generateSVG(contributions) {
   const width = 720;
   const height = 112;
   const cellSize = 10;
   const cellPadding = 2;
 
-  const canvas = createCanvas(width, height);
-  const ctx = canvas.getContext('2d');
-
-  // Set background
-  ctx.fillStyle = '#ffffff';
-  ctx.fillRect(0, 0, width, height);
+  let svg = `<?xml version="1.0" encoding="UTF-8"?>
+  <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">
+    <style>
+      rect { shape-rendering: geometricPrecision; }
+      .contribution { fill: #ebedf0; }
+      .contribution-1 { fill: #9be9a8; }
+      .contribution-2 { fill: #40c463; }
+      .contribution-3 { fill: #30a14e; }
+      .contribution-4 { fill: #216e39; }
+    </style>`;
 
   let x = 0;
   let y = 0;
@@ -59,15 +62,14 @@ function generatePNG(contributions) {
   contributions.weeks.forEach(week => {
     week.contributionDays.forEach(day => {
       const count = day.contributionCount;
-      let color = '#ebedf0';
+      let colorClass = 'contribution';
 
-      if (count > 0) color = '#9be9a8';
-      if (count > 5) color = '#40c463';
-      if (count > 10) color = '#30a14e';
-      if (count > 20) color = '#216e39';
+      if (count > 0) colorClass = 'contribution-1';
+      if (count > 5) colorClass = 'contribution-2';
+      if (count > 10) colorClass = 'contribution-3';
+      if (count > 20) colorClass = 'contribution-4';
 
-      ctx.fillStyle = color;
-      ctx.fillRect(x, y, cellSize, cellSize);
+      svg += `<rect x="${x}" y="${y}" width="${cellSize}" height="${cellSize}" class="${colorClass}" />`;
 
       y += cellSize + cellPadding;
     });
@@ -76,5 +78,7 @@ function generatePNG(contributions) {
     x += cellSize + cellPadding;
   });
 
-  return canvas.toBuffer();
+  svg += '</svg>';
+
+  return svg;
 }
