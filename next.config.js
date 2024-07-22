@@ -1,5 +1,10 @@
 module.exports = {
   reactStrictMode: true,
+  experimental: {
+    turbotrace: {
+      logLevel: 'error'
+    }
+  },
   async headers() {
     return [
       {
