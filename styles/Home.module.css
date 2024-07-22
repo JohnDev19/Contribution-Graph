@@ -36,6 +36,7 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   margin-bottom: 1rem;
+  width: 300px;
 }
 
 .button {
@@ -48,6 +49,17 @@
   cursor: pointer;
 }
 
-.graph {
+.button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.error {
+  color: red;
+  margin-top: 1rem;
+}
+
+.graphContainer {
   margin-top: 2rem;
+  text-align: center;
 }
