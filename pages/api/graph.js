@@ -8,8 +8,10 @@ export default async function handler(req, res) {
   }
 
   try {
-    const contributions = await fetchContributions(username, process.env.GITHUB_TOKEN);
-    res.status(200).json(contributions);
+    const svgString = await fetchContributions(username, process.env.GITHUB_TOKEN);
+
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200).json({ svg: svgString });
   } catch (error) {
     console.error('Error:', error);
     res.status(500).json({ error: 'Failed to fetch contributions' });
