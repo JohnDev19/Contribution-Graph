@@ -4,7 +4,7 @@ import styles from '../styles/Home.module.css';
 
 export default function Home() {
   const [username, setUsername] = useState('');
-  const [contributionData, setContributionData] = useState(null);
+  const [svgData, setSvgData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -12,6 +12,7 @@ export default function Home() {
     e.preventDefault();
     setLoading(true);
     setError(null);
+    setSvgData(null);
 
     try {
       const response = await fetch(`/api/graph?username=${username}`);
@@ -19,8 +20,13 @@ export default function Home() {
         throw new Error('Failed to fetch contribution data');
       }
       const data = await response.json();
-      setContributionData(data);
+      if (data.svg) {
+        setSvgData(data.svg);
+      } else {
+        throw new Error('Invalid response format');
+      }
     } catch (err) {
+      console.error('Fetch error:', err);
       setError(err.message);
     } finally {
       setLoading(false);
@@ -54,12 +60,9 @@ export default function Home() {
 
         {error && <p className={styles.error}>{error}</p>}
 
-        {contributionData && (
+        {svgData && (
           <div className={styles.graphContainer}>
-            <h2>Total Contributions: {contributionData.totalContributions}</h2>
-            <div className={styles.graphWrapper}>
-              <div dangerouslySetInnerHTML={{ __html: contributionData.svg }} />
-            </div>
+            <div dangerouslySetInnerHTML={{ __html: svgData }} />
           </div>
         )}
       </main>
