@@ -9,7 +9,7 @@ export default async function handler(req, res) {
 
   try {
     const svgString = await fetchContributions(username, process.env.GITHUB_TOKEN);
-
+    
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json({ svg: svgString });
   } catch (error) {
