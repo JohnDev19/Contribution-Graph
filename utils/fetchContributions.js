@@ -45,14 +45,15 @@ function generateSVG(contributions) {
   const cellSize = 10;
   const cellPadding = 2;
 
-  let svg = `<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">
+  let svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
     <style>
       .contribution { fill: #ebedf0; }
       .contribution-1 { fill: #9be9a8; }
       .contribution-2 { fill: #40c463; }
       .contribution-3 { fill: #30a14e; }
       .contribution-4 { fill: #216e39; }
-    </style>`;
+    </style>
+    <g transform="translate(0, 0)">`;
 
   let x = 0;
   let y = 0;
@@ -76,10 +77,7 @@ function generateSVG(contributions) {
     x += cellSize + cellPadding;
   });
 
-  svg += '</svg>';
+  svg += `</g></svg>`;
 
-  return { 
-    svg,
-    totalContributions: contributions.totalContributions
-  };
+  return svg;
 }
