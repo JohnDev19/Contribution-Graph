@@ -47,7 +47,7 @@ export default function Home() {
             className={styles.input}
             required
           />
-          <button type="submit" className={styles.button} disabled={loading}>
+          <button type="submit" className={`${styles.button} ${loading ? styles.loading : ''}`} disabled={loading}>
             {loading ? 'Loading...' : 'Generate Graph'}
           </button>
         </form>
@@ -56,8 +56,10 @@ export default function Home() {
 
         {contributionData && (
           <div className={styles.graphContainer}>
-            <h2>Contributions: {contributionData.totalContributions}</h2>
-            <div dangerouslySetInnerHTML={{ __html: contributionData.svg }} />
+            <h2>Total Contributions: {contributionData.totalContributions}</h2>
+            <div className={styles.graphWrapper}>
+              <div dangerouslySetInnerHTML={{ __html: contributionData.svg }} />
+            </div>
           </div>
         )}
       </main>
