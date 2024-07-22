@@ -1,65 +1,140 @@
 .container {
   min-height: 100vh;
-  padding: 0 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 2rem;
 }
 
 .main {
-  padding: 5rem 0;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
+  max-width: 800px;
+  background-color: var(--card-background);
+  border-radius: 10px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px var(--shadow-color);
+  transition: all 0.3s ease;
 }
 
 .title {
-  margin: 0;
-  line-height: 1.15;
-  font-size: 4rem;
+  font-size: 2.5rem;
   text-align: center;
+  margin-bottom: 2rem;
+  color: var(--primary-color);
 }
 
 .form {
-  margin-top: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
 .input {
-  padding: 0.5rem;
+  width: 100%;
+  max-width: 400px;
+  padding: 0.75rem 1rem;
   font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-bottom: 1rem;
-  width: 300px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  transition: border-color 0.3s ease;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--primary-color);
 }
 
 .button {
-  padding: 0.5rem 1rem;
+  padding: 0.75rem 1.5rem;
   font-size: 1rem;
-  background-color: #0070f3;
+  background-color: var(--primary-color);
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.button:hover {
+  background-color: #0051cc;
+}
+
+.button:active {
+  transform: scale(0.98);
 }
 
 .button:disabled {
-  background-color: #cccccc;
+  background-color: #ccc;
   cursor: not-allowed;
 }
 
 .error {
-  color: red;
+  color: #ff4136;
+  text-align: center;
   margin-top: 1rem;
 }
 
 .graphContainer {
   margin-top: 2rem;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.graphContainer h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+}
+
+.graphWrapper {
+  width: 100%;
+  overflow-x: auto;
+  padding: 1rem;
+  background-color: var(--card-background);
+  border-radius: 5px;
+  box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .main {
+    padding: 1.5rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .input, .button {
+    font-size: 0.9rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .main {
+    max-width: 1000px;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.loading {
+  animation: pulse 1.5s infinite;
 }
