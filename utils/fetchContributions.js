@@ -78,8 +78,5 @@ function generateSVG(contributions) {
 
   svg += '</svg>';
 
-  return { 
-    svg,
-    totalContributions: contributions.totalContributions
-  };
+  return svg;
 }
