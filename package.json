@@ -7,8 +7,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "cleanup": "rm -rf .next/cache/webpack-loader-cache-1"
+    "lint": "next lint"
   },
   "keywords": [
     "github",
