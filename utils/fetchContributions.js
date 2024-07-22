@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export async function fetchContributions(username) {
+export async function fetchContributions(username, token) {
   const query = `
     query($username: String!) {
       user(login: $username) {
@@ -27,7 +27,7 @@ export async function fetchContributions(username) {
       variables
     }, {
       headers: {
-        Authorization: `Bearer ${process.env.GITHUB_TOKEN}`
+        Authorization: `Bearer ${token}`
       }
     });
 
