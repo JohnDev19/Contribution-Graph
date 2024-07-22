@@ -2,12 +2,8 @@ services:
   - type: web
     name: github-contribution-graph
     env: node
-    buildCommand: npm run cleanup && npm install && npm run build
+    buildCommand: npm install && npm run build
     startCommand: npm start
     envVars:
       - key: GITHUB_TOKEN
         sync: false
-    disk:
-      name: next-cache
-      mountPath: /opt/render/project/src/.next/cache
-      sizeGB: 1
